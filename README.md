@@ -27,7 +27,7 @@ Before starting, you must have the following tools installed and configured on y
 
 ### **For Windows Users: A Note on WSL 2**
 
-This project uses a Linux-based development environment. To run it successfully on Windows, it is **highly recommended** to use the Windows Subsystem for Linux **WSL 2**.
+This project uses a Linux-based development environment. To run it successfully on Windows, it is **highly recommended** to use the Windows Subsystem for Linux **WSL 2** (available on Windows 10+).
 
 1. Open PowerShell **as an Administrator** and run: `wsl --install`
 2. This will install WSL and the default Ubuntu distribution. Once complete, restart your machine.
