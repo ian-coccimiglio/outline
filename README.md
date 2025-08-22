@@ -46,7 +46,7 @@ _Please feel free to check tech blogs, Web or Youtube videos for clear and visua
 1. **Clone the Repo:**
 
 ```bash
-git clone https://github.com/chiillbro/outline.git
+git clone https://github.com/ian-coccimiglio/outline.git
 ```
 
 2. **Configure Environment Variables:**
@@ -86,14 +86,14 @@ git clone https://github.com/chiillbro/outline.git
 > [!NOTE]
 >
 > 1. Please ensure the `FILE_STORAGE_LOCAL_ROOT_DIR` was changed to `./data` for security reasons
-> 2. As per my testing, Commenting out Slack variables was enough. Please feel free to comment out other auth provider variables if necessary
+> 2. Commenting out Slack variables should be enough.
 
 
 3. **Start the Application:**
    - From your terminal, inside the cloned outline project directory, run:
 
    ```bash
-   make up
+   sudo make up
    ```
 
    - This single command will start the Docker services, install dependencies, create SSL certs, run database migrations automatically and start the development server. Leave this terminal window running.
