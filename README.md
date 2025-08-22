@@ -37,7 +37,7 @@ _Please feel free to check tech blogs, Web or Youtube videos for clear and visua
 
 ### Install these first
 
-1. **Docker Desktop** download it from the official website (or Docker with Docker Compose)
+1. **[Docker Desktop](https://docs.docker.com/desktop/)** download it from the official website (or Docker with Docker Compose)
 2. **[Node.js (v18+)](https://nodejs.org/en/download) & [Yarn(v1+)](https://yarnpkg.com/getting-started/install)**
 3. **`make` command-line tool**
 4. **`mkcert`** **(for generating locally trusted development certificates)**
@@ -64,9 +64,10 @@ git clone https://github.com/ian-coccimiglio/outline.git
       URL=https://localhost:3000
       ```
 
-      2. **Generate Secret Keys (run `openssl rand -hex 32` in the terminal for two times)**
+      2. **Generate Secret Keys (run `openssl rand -hex 32` twice in the terminal)**
 
       ```bash
+      # Insert the generated secret keys in the .env file
       SECRET_KEY=[your first random string]
       ...
       UTILS_SECRET=[your second random string]
@@ -100,4 +101,4 @@ The following steps were successfully completed:
 - No significant blockers were found. The project is well-architected for local development across all major platforms, provided Windows users utilize WSL 2.
 - The `sudo make up` command in the `Makefile` handles the entire setup process, including database migrations, which simplifies the documented steps.
 - `sudo make destroy` will close the program and run the shutdown sequence.
-- .env.sample and install
+- `.env.sample` and `install-local-ssl.js` were modified to streamline local development (setting defaults to localhost).
