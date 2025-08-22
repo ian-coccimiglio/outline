@@ -1,9 +1,9 @@
 # Outline Project - Local Setup & Verification Report
 
-- **Project:** Outline (`https://github.com/chiillbro/outline`)
+- **Project:** Outline (`https://github.com/ian-coccimiglio/outline`)
 - **Original by:** Siva Sankar Reddy Asam
 - **Updated by:** Ian Coccimiglio
-- **Last Updated Date:** August 21, 2025
+- **Last Updated Date:** August 22, 2025
 
 ---
 
@@ -12,6 +12,14 @@
 **This project is fully self-contained and can be run locally end-to-end on macOS, Linux and Windows (via WSL 2).**
 
 This forked repo can be cloned and run without requiring any external API keys or secrets. All necessary services are managed via Docker Compose, and the application correctly falls back to a first-run setup screen, allowing for local user provisioning.
+
+## Browser & OS Compatibility Matrix
+
+| Browser | Linux | Windows | Mac |
+|---------|-------|---------|-----|
+| Firefox |  ✅   |         | ✅  |
+| Safari  |  NA   |  NA     | ✅  |
+| Chrome  |  ✅   |         | ✅  |
 
 ---
 
