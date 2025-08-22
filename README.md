@@ -13,15 +13,13 @@
 
 This forked repo can be cloned and run without requiring any external API keys or secrets. All necessary services are managed via Docker Compose, and the application correctly falls back to a first-run setup screen, allowing for local user provisioning.
 
-## Browser & OS Compatibility Matrix
+## Browser & OS Compatibility
 
-| Browser | Linux | Windows | Mac |
-|---------|-------|---------|-----|
-| Firefox |  ✅   |         | ✅  |
-| Safari  |  NA   |  NA     | ✅  |
-| Chrome  |  ✅   |         | ✅  |
-
----
+| Browser | Linux | Windows via WSL2 | Mac |
+|---------|-------|------------------|-----|
+| Firefox |  ✅   |                  | ✅  |
+| Safari  |  NA   |  NA              | ✅  |
+| Chrome  |  ✅   |                  | ✅  |
 
 ## 1. Prerequisites
 
@@ -37,10 +35,10 @@ This project uses a Linux-based development environment. To run it successfully 
 
 _Please feel free to check tech blogs, Web or Youtube videos for clear and visual instructions._
 
-### **Available software**
+### Install these first
 
-1. **Docker Desktop:** download it from the official website (or Docker with Docker Compose)
-2. **Node.js (v18+) & Yarn(v1)**
+1. **Docker Desktop** download it from the official website (or Docker with Docker Compose)
+2. **[Node.js (v18+)](https://nodejs.org/en/download) & [Yarn(v1+)](https://yarnpkg.com/getting-started/install)**
 3. **`make` command-line tool**
 4. **`mkcert`** **(for generating locally trusted development certificates)**
 
@@ -70,32 +68,9 @@ git clone https://github.com/ian-coccimiglio/outline.git
 
       ```bash
       SECRET_KEY=[your first random string]
+      ...
       UTILS_SECRET=[your second random string]
       ```
-
-      3. **Ensure local file storage is enabled:**
-
-      ```bash
-      FILE_STORAGE=local
-      FILE_STORAGE_LOCAL_ROOT_DIR=./data
-      ```
-
-      4. **Disable ALL external auth providers** by commenting them out with a `#`. This is critical for reaching the first-run setup screen.
-
-      ```bash
-      # Comment out these variables in `.env`
-      # SLACK_CLIENT_ID=...
-      # SLACK_CLIENT_SECRET=...
-      # SLACK_VERIFICATION_TOKEN=...
-      # SLACK_APP_ID=...
-      # SLACK_MESSAGE_ACTIONS=...
-      ```
-
-> [!NOTE]
->
-> 1. Please ensure the `FILE_STORAGE_LOCAL_ROOT_DIR` was changed to `./data` for security reasons
-> 2. Commenting out Slack variables should be enough.
-
 
 3. **Start the Application:**
    - From your terminal, inside the cloned outline project directory, run:
@@ -123,4 +98,6 @@ The following steps were successfully completed:
 ## 4. Notes
 
 - No significant blockers were found. The project is well-architected for local development across all major platforms, provided Windows users utilize WSL 2.
-- The `make up` command in the `Makefile` handles the entire setup process, including database migrations, which simplifies the documented steps.
+- The `sudo make up` command in the `Makefile` handles the entire setup process, including database migrations, which simplifies the documented steps.
+- `sudo make destroy` will close the program and run the shutdown sequence.
+- .env.sample and install
