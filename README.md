@@ -1,105 +1,134 @@
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/31465/34380645-bd67f474-eb0b-11e7-8d03-0151c1730654.png" height="29" />
-</p>
-<p align="center">
-  <i>A fast, collaborative, knowledge base for your team built using React and Node.js.<br/>Try out Outline using our hosted version at <a href="https://www.getoutline.com">www.getoutline.com</a>.</i>
-  <br/>
-  <img width="1640" alt="screenshot" src="https://user-images.githubusercontent.com/380914/110356468-26374600-7fef-11eb-9f6a-f2cc2c8c6590.png">
-</p>
-<p align="center">
-  <a href="https://circleci.com/gh/outline/outline" rel="nofollow"><img src="https://circleci.com/gh/outline/outline.svg?style=shield"></a>
-  <a href="http://www.typescriptlang.org" rel="nofollow"><img src="https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg" alt="TypeScript"></a>
-  <a href="https://github.com/prettier/prettier"><img src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat" alt="Prettier"></a>
-  <a href="https://github.com/styled-components/styled-components"><img src="https://img.shields.io/badge/style-%F0%9F%92%85%20styled--components-orange.svg" alt="Styled Components"></a>
-  <a href="https://translate.getoutline.com/project/outline" alt="Localized"><img src="https://badges.crowdin.net/outline/localized.svg"></a>
-</p>
+# Outline Project - Local Setup & Verification Report
 
-This is the source code that runs [**Outline**](https://www.getoutline.com) and all the associated services. If you want to use Outline then you don't need to run this code, we offer a hosted version of the app at [getoutline.com](https://www.getoutline.com). You can also find documentation on using Outline in [our guide](https://docs.getoutline.com/s/guide).
+- **Project:** Outline (`https://github.com/chiillbro/outline`)
+- **Original by:** Siva Sankar Reddy Asam
+- **Updated by:** Ian Coccimiglio
+- **Last Updated Date:** August 21, 2025
 
-If you'd like to run your own copy of Outline or contribute to development then this is the place for you.
+---
 
-# Installation
+## Verdict
 
-Please see the [documentation](https://docs.getoutline.com/s/hosting/) for running your own copy of Outline in a production configuration.
+**This project is fully self-contained and can be run locally end-to-endon macOS, Linux and Windows (via WSL 2).**
 
-If you have questions or improvements for the docs please create a thread in [GitHub discussions](https://github.com/outline/outline/discussions).
+This forked repo can be cloned and run without requiring any external API keys or secrets. All necessary services are managed via Docker Compose, and the application correctly falls back to a first-run setup screen, allowing for local user provisioning.
 
-# Development
+---
 
-There is a short guide for [setting up a development environment](https://docs.getoutline.com/s/hosting/doc/local-development-5hEhFRXow7) if you wish to contribute changes, fixes, and improvements to Outline.
+## 1. Prerequisites
 
-## Contributing
+Before starting, you must have the following tools installed and configured on your system.
 
-Outline is built and maintained by a small team – we'd love your help to fix bugs and add features!
+### **For Windows Users: A Note on WSL 2**
 
-Before submitting a pull request _please_ discuss with the core team by creating or commenting in an issue on [GitHub](https://www.github.com/outline/outline/issues) – we'd also love to hear from you in the [discussions](https://www.github.com/outline/outline/discussions). This way we can ensure that an approach is agreed on before code is written. This will result in a much higher likelihood of your code being accepted.
+This project uses a Linux-based development environment. To run it successfully on Windows, it is **highly recommended** to use the **WSL 2**.
 
-If you’re looking for ways to get started, here's a list of ways to help us improve Outline:
+1. Open PowerShell **as an Administrator** and run: `wsl --install`
+2. This will install WSL and the default Ubuntu distribution. Once complete, restart your machine.
+3. You can now open the "Ubuntu" app from your Start Menu. **All subsequent commands in this guide should be run inside this Ubuntu terminal**.
 
-- [Translation](docs/TRANSLATION.md) into other languages
-- Issues with [`good first issue`](https://github.com/outline/outline/labels/good%20first%20issue) label
-- Performance improvements, both on server and frontend
-- Developer happiness and documentation
-- Bugs and other issues listed on GitHub
+_Please feel free to check tech blogs, Web or Youtube videos for clear and visual instructions._
 
-## Architecture
+### **Must and Should**
 
-If you're interested in contributing or learning more about the Outline codebase
-please refer to the [architecture document](docs/ARCHITECTURE.md) first for a high level overview of how the application is put together.
+1. **Docker Desktop:** download it from the official website
+2. **Node.js (v18+) & Yarn(v1)**
+3. **`make` command-line tool**
+4. **`mkcert`** **(for generating locally trusted development certificates)**
 
-## Debugging
+> [!IMPORTANT]
+> After installing `mkcert` for the first time, you must run this one-time command to install the local certificate authority into your system and browser trust scores `mkcert -install`
 
-In development Outline outputs simple logging to the console, prefixed by categories. In production it outputs JSON logs, these can be easily parsed by your preferred log ingestion pipeline.
+---
 
-HTTP logging is disabled by default, but can be enabled by setting the `DEBUG=http` environment variable.
+## 2. Step-by-Step Setup Instructions
 
-## Tests
+1. **Clone the Repo:**
 
-We aim to have sufficient test coverage for critical parts of the application and aren't aiming for 100% unit test coverage. All API endpoints and anything authentication related should be thoroughly tested.
-
-To add new tests, write your tests with [Jest](https://facebook.github.io/jest/) and add a file with `.test.js` extension next to the tested code.
-
-```shell
-# To run all tests
-make test
-
-# To run backend tests in watch mode
-make watch
+```bash
+git clone https://github.com/chiillbro/outline.git
 ```
 
-Once the test database is created with `make test` you may individually run
-frontend and backend tests directly.
+2. **Configure Environment Variables:**
+   1. Create a `.env` file by copying the sample: `cp .env.sample .env`
+   2. Open the new `.env` file and make the following critical edits:
+      1. **Set the URL:**
 
-```shell
-# To run backend tests
-yarn test:server
+      ```bash
+      URL=https://local.outline.dev:3000
+      ```
 
-# To run a specific backend test
-yarn test:server myTestFile
+      2. **Generate Secret Keys (run `openssl rand -hex 32` in the terminal for two times)**
 
-# To run frontend tests
-yarn test:app
-```
+      ```bash
+      SECRET_KEY=[your first random string]
+      UTILS_SECRET=[your second random string]
+      ```
 
-## Migrations
+      3. **Ensure local file storage is enabled:**
 
-Sequelize is used to create and run migrations, for example:
+      ```bash
+      FILE_STORAGE=local
+      FILE_STORAGE_LOCAL_ROOT_DIR=./data
+      ```
 
-```shell
-yarn sequelize migration:generate --name my-migration
-yarn sequelize db:migrate
-```
+      4. **Disable ALL external auth providers** by commenting them out with a `#`. This is critical for forcing the first-run setup screen.
 
-Or to run migrations on test database:
+      ```bash
+      # SLACK_CLIENT_ID=...
+      # SLACK_CLIENT_SECRET=...
+      # SLACK_VERIFICATION_TOKEN=...
+      # SLACK_APP_ID=...
+      # SLACK_MESSAGE_ACTIONS=...
+      ```
 
-```shell
-yarn sequelize db:migrate --env test
-```
+> [!NOTE]
+>
+> 1. Please ensure the `FILE_STORAGE_LOCAL_ROOT_DIR` was changed to `./data` for security reasons
+> 2. As per my testing, Commenting out Slack variables was enough. Please feel free to comment out other auth provider variables if necessary
 
-# Activity
+3. **Prepare Local Hostname:**
+   Your computer needs to know that local.outline.dev points to itself.
+   - **On macOS & Linux**
+     1. Run `sudo nano /etc/hosts` in your terminal
+     2. Enter you computer's password when prompted.
+     3. Use the arrow keys to scroll to the very bottom of the file that opened.
+     4. Add the following new line: `127.0.0.1 local.outline.dev`
+     5. To save and exit: Press `Control + O`, then press `Enter`, then press `Control + X`
+   - **On Windows:**
+     1. Click the Start button, type **Notepad**.
+     2. Right-click on the Notepad icon and select "**Run as administrator**".
+     3. In Notepad, go to File -> Open.
+     4. Navigate to `C:\Windows\System32\drivers\etc`.
+     5. You may need to change the file type dropdown in the bottom right from `Text Documents (.txt)` to `All Files (.*)` to see the hosts file.
+     6. Open the `hosts` file.
+     7. Scroll to the very bottom and add the line: `127.0.0.1 local.outline.dev`
+     8. Save the file and close Notepad.
 
-![Alt](https://repobeats.axiom.co/api/embed/ff2e4e6918afff1acf9deb72d1ba6b071d586178.svg "Repobeats analytics image")
+4. **Start the Application:**
+   - From your terminal, inside the cloned outline project directory, run:
 
-# License
+   ```bash
+   make up
+   ```
 
-Outline is [BSL 1.1 licensed](LICENSE).
+   - This single command will start the Docker services, install dependencies, create SSL certs, run database migrations automatically and start the development server. Leave this terminal window running.
+
+---
+
+## 3. End-to-End Verification
+
+The following steps were successfully completed:
+
+- **Application Starts:** The application runs and is accessible at `https://local.outline.dev:3000`
+- **First-Run Provisioning:** The application correctly displays a setup screen to create the first workspace and admin user.
+- **User Signup:** Able to create a new user account through the initial setup screen.
+- **Core Functionality:** Able to log in, create a new collection, and create a new document.
+- **File Uploads:** Confirmed that uploading an image to a document stores the file in the `./data` directory within the project folder
+
+---
+
+## 4. Notes
+
+- No significant blockers were found. The project is well-architected for local development across all major platforms, provided Windows users utilize WSL 2.
+- The `make up` command in the `Makefile` handles the entire setup process, including database migrations, which simplifies the documented steps.
