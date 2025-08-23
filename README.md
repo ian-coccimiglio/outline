@@ -61,14 +61,8 @@ git clone https://github.com/ian-coccimiglio/outline.git
 
 2. **Configure Environment Variables:**
    1. Create a `.env` file by copying the sample: `cp .env.sample .env`
-   2. Open the new `.env` file and make the following critical edits:
-      1. **Set the URL:**
-
-      ```bash
-      URL=https://localhost:3000
-      ```
-
-      2. **Generate Secret Keys (run `openssl rand -hex 32` twice in the terminal)**
+   2. Open the new `.env` file and edit the following keys:
+      **Generate Secret Keys (run `openssl rand -hex 32` twice in the terminal)**
 
       ```bash
       # Insert the generated secret keys in the .env file
@@ -82,6 +76,7 @@ git clone https://github.com/ian-coccimiglio/outline.git
 
    ```bash
    sudo make up # On Mac/Linux
+   OR
    make up # On Windows WSL2
    ```
 
@@ -103,7 +98,7 @@ The following steps were successfully completed:
 
 ## 4. Notes
 
-- No significant blockers were found. The project is well-architected for local development across all major platforms, provided Windows users utilize WSL 2.
+- No significant blockers were found. The project is well-architected for local development on Linux and Mac, with only minor complications for Windows WSL2 development.
 - The `sudo make up` command in the `Makefile` handles the entire setup process, including database migrations, which simplifies the documented steps.
 - `sudo make destroy` will close the program and run the shutdown sequence.
 - `.env.sample` and `install-local-ssl.js` were modified to streamline local development (setting defaults to localhost).
