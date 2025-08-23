@@ -17,9 +17,14 @@ This forked repo can be cloned and run without requiring any external API keys o
 
 | Browser | Linux | Windows via WSL2 | Mac |
 |---------|-------|------------------|-----|
-| Firefox |  ✅   |                  | ✅  |
+| Firefox |  ✅   |  ⚠️               | ✅  |
 | Safari  |  NA   |  NA              | ✅  |
-| Chrome  |  ✅   |                  | ✅  |
+| Chrome  |  ✅   |  ⚠️               | ✅  |
+
+Note: Getting mkcert to work properly is complicated in Windows WSL2. There is a guide on how to do it [here](https://github.com/FiloSottile/mkcert/issues/357#issuecomment-1466762021). 
+
+Alternatively, if you open browser link and get a warning about "untrusted" certificates, simply load https://localhost:3000 **and** https://localhost:3001 into your web browser and trust the certificates.
+
 
 ## 1. Prerequisites
 
@@ -32,7 +37,6 @@ This project uses a Linux-based development environment. To run it successfully 
 1. Open PowerShell **as an Administrator** and run: `wsl --install`
 2. This will install WSL and the default Ubuntu distribution. Once complete, restart your machine.
 3. You can now open the "Ubuntu" app from your Start Menu. **All subsequent commands in this guide should be run inside this Ubuntu terminal**.
-
 _Please feel free to check tech blogs, Web or Youtube videos for clear and visual instructions._
 
 ### Install these first
@@ -77,7 +81,8 @@ git clone https://github.com/ian-coccimiglio/outline.git
    - From your terminal, inside the cloned outline project directory, run:
 
    ```bash
-   sudo make up
+   sudo make up # On Mac/Linux
+   make up # On Windows WSL2
    ```
 
    - This single command will start the Docker services, install dependencies, create SSL certs, run database migrations automatically and start the development server. Leave this terminal window running.
