@@ -76,7 +76,7 @@ git clone https://github.com/ian-coccimiglio/outline.git
 
    ```bash
    sudo make up # On Mac/Linux
-   OR
+   ## OR ##
    make up # On Windows WSL2
    ```
 
