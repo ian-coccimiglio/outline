@@ -41,10 +41,10 @@ _Please feel free to check tech blogs, Web or Youtube videos for clear and visua
 
 ### Install these first
 
-1. **[Docker Desktop](https://docs.docker.com/desktop/)** download it from the official website (or Docker with Docker Compose)
-2. **[Node.js (v18+)](https://nodejs.org/en/download) & [Yarn(v1+)](https://yarnpkg.com/getting-started/install)**
-3. **`make` command-line tool**
-4. **`mkcert`** **(for generating locally trusted development certificates)**
+1. **[Docker Desktop](https://docs.docker.com/desktop/)** Download it from the official website (or install Docker with Docker Compose from the terminal).
+2. **[Node.js (v18-22)](https://nodejs.org/en/download) & [Yarn(v1+)](https://yarnpkg.com/getting-started/install)**
+3. **`make` command-line tool** (in Ubuntu: `sudo apt install make`)
+4. **`mkcert` to generate locally trusted development certificates** (in Ubuntu: `sudo apt install mkcert`)
 
 > [!IMPORTANT]
 > After installing `mkcert` for the first time, you must run this one-time command to install the local certificate authority into your system and browser trust scores `mkcert -install`
